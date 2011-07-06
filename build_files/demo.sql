@@ -49,3 +49,21 @@ base_search   'search index=_internal source=*metrics.log group="queue"',
 earliest '-24h',
 latest 'now'
 );
+
+
+create or replace foreign table splunk_demo.access_logs(
+"_time" double,
+"host" varchar(256),
+"method" varchar(100),
+"source" varchar(256),
+"category" varchar(256),
+"action" varchar(256),
+"clientip" varchar(256),
+"status" int
+)
+server splunk_server
+options (
+base_search   'search source=*combined.log',
+earliest '-1000d',
+latest 'now'
+);
