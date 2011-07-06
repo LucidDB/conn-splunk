@@ -41,7 +41,7 @@ import com.splunk.util.StringUtils;
 class SplunkPushDownRule
     extends RelOptRule
 {
-    public static final String UDX_SPECIFIC_NAME = "SPLUNK_SEARCH";
+    public static final String UDX_SPECIFIC_NAME = "LOCALDB.SYS_SPLUNK.SPLUNK_SEARCH";
 
     private static final Logger gLogger  =
         FarragoTrace.getClassTracer(SplunkPushDownRule.class);
@@ -134,7 +134,8 @@ class SplunkPushDownRule
     // ~ Methods --------------------------------------------------------------
 
     public boolean isSplunkSearchUdx(SplunkUdxRel udxRel){
-        return udxRel.getUdx().getName().equalsIgnoreCase(UDX_SPECIFIC_NAME);
+        // return udxRel.getUdx().getName().equalsIgnoreCase(UDX_SPECIFIC_NAME);
+        return UDX_SPECIFIC_NAME.endsWith(udxRel.getUdx().getName().toUpperCase());
     }
     
     // implement RelOptRule
