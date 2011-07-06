@@ -1,10 +1,8 @@
 !set force true
 !set maxwidth 10000
 
--- Use deployment descriptor (requires LucidDB 0.9.4)
-create or replace jar applib.splunk_jar
-library 'file:/path/to/luciddb/plugin/splunk.jar'
-options(1);
+create schema splunk_demo;
+set schema 'splunk_demo';
 
 -- NEED-TO-EDIT --
 create or replace server splunk_server
@@ -15,17 +13,11 @@ username      'admin',
 password      'changeme'
 );
 
--- change session personality, the jar provides a postgresql personality
--- this should be used with the pg2luciddb driver
-alter session implementation set jar applib.splunk_jar;
-
 -------------------------------------------------------------------
 -------------------------------------------------------------------
 -- CREATE FOREIGN TABLE EXAMPLES, FEEL FREE TO COMMENT THESE OUT --
 -------------------------------------------------------------------
 -------------------------------------------------------------------
-
-drop schema splunk_demo cascade;
 
 -- table that represent the last 24 hours of Splunk's _internal index
 -- Any query issued against this table will modify the base_search such that Splunk' handles 
@@ -57,5 +49,3 @@ base_search   'search index=_internal source=*metrics.log group="queue"',
 earliest '-24h',
 latest 'now'
 );
-
-

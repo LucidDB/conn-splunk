@@ -59,7 +59,7 @@ class MedSplunkDataServer
 
 
     public static final String DEFAULT_UDX_SPECIFIC_NAME
-        = "LOCALDB.SPLUNK.SPLUNK_SEARCH";
+        = "LOCALDB.SYS_SPLUNK.SPLUNK_SEARCH";
 
     //~ Instance fields --------------------------------------------------------
 

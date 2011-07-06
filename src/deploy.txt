@@ -1,0 +1,22 @@
+SQLActions[ ] = {
+  "BEGIN INSTALL
+  create or replace schema sys_splunk;
+  create or replace foreign data wrapper splunk_wrapper
+    library 'thisjar'
+    language java;
+
+  -- helper udx for foreign tables
+    create function sys_splunk.splunk_search(srch varchar(4096), earliest varchar(32), latest varchar(32), url varchar(1024), username varchar(128), password varchar(128), fields varchar(4096))
+    returns table( objects varchar(512) )
+    language java
+    parameter style system defined java
+    no sql
+    external name 'thisjar:com.splunk.udx.SplunkUdx.search';
+
+END INSTALL",
+    "BEGIN REMOVE
+      drop function sys_splunk.splunk_search;
+      drop foreign data wrapper splunk_wrapper;
+      drop schema sys_splunk;
+END REMOVE"
+}

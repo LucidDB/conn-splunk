@@ -35,13 +35,19 @@
           </fileset>
         </unjar>
 
-
+    <!-- Copy over deploy.txt -->
+        <copy todir="jar_tmp">
+            <fileset dir="src" includes="deploy.txt"/>
+        </copy>
 
         <jar destfile="jars/splunk.jar" basedir="jar_tmp">
 		<manifest>
  			<attribute name="DataWrapperClassName" value="com.splunk.udx.MedSplunkForeignDataWrapper" />
-                        <attribute name="PluginFactoryClassName" value="com.splunk.udx.PostgresPersonalityFactory" />
-                </manifest>
+            <attribute name="PluginFactoryClassName" value="com.splunk.udx.PostgresPersonalityFactory" />
+            <section name="deploy.txt">
+                <attribute name="SQLJDeploymentDescriptor" value="TRUE" />
+            </section>
+        </manifest>
         </jar>
         <delete dir="jar_tmp" />
     </target>
