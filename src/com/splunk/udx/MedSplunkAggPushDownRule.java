@@ -154,7 +154,7 @@ public class MedSplunkAggPushDownRule extends SplunkPushDownRule
             i = 0; 
             stats.append("| rename ");
             for(String g : groupBy){
-                stats.append(searchEscape(g)).append(" AS ").append(searchEscape(topRow.getFields()[i++].getName()));
+                stats.append(searchEscape(g)).append(" AS ").append(searchEscape(topRow.getFields()[i++].getName())).append(" ");
             }
         }
 
