@@ -151,6 +151,11 @@ public class MedSplunkAggPushDownRule extends SplunkPushDownRule
                    stats.append(", ");
                  stats.append(searchEscape(g));
            }
+            i = 0; 
+            stats.append("| rename ");
+            for(String g : groupBy){
+                stats.append(searchEscape(g)).append(" AS ").append(searchEscape(topRow.getFields()[i++].getName()));
+            }
         }
 
         gLogger.info("agg str: " + aggRel.toString() + " splunk agg: " + stats.toString());
