@@ -1,0 +1,7 @@
+- Configure a LucidDB datasource named "luciddb"
+- Drop all the files in this directory into pentaho-solutions/Splunk
+- add the following to system/olap/datasources.xml
+      <Catalog name="AccessLogs"> 
+        <DataSourceInfo>Provider=mondrian;DataSource=luciddb</DataSourceInfo>  
+        <Definition>solution:Splunk/access_logs.mondrian.xml</Definition> 
+      </Catalog>  

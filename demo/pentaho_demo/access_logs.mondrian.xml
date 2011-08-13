@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema name="Access Logs Splunk">
+  <Cube name="Access Logs">
+  <Table schema="SPLUNK_DEMO" name="ACCESS_LOGS_METADATA"/>
+  <Dimension name="Time of Day">
+    <Hierarchy hasAll="true">
+      <Level name="Hour" column="date_hour" type="Integer" uniqueMembers="false"/>
+      <Level name="Minute" column="date_minute" type="Integer" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Time">
+    <Hierarchy hasAll="true">
+      <Level name="Year" column="date_year" type="Integer" uniqueMembers="false"/>
+      <Level name="Month" column="date_month" uniqueMembers="false"/>
+      <Level name="Day" column="date_mday" type="Integer" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Day of Week">
+    <Hierarchy hasAll="true">
+      <Level name="Day of Week" column="date_wday" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Host">
+    <Hierarchy hasAll="true">
+      <Level name="Host" column="host" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="HTTP Method">
+    <Hierarchy hasAll="true">
+      <Level name="HTTP Method" column="Http Method" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="HTTP Status">
+    <Hierarchy hasAll="true">
+      <Level name="HTTP Status" column="status" type="Integer" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Source">
+    <Hierarchy hasAll="true">
+      <Level name="Source" column="source" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Customer Action">
+    <Hierarchy hasAll="true">
+      <Level name="Customer Action" column="Customer Action" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Client IP">
+    <Hierarchy hasAll="true">
+      <Level name="Client IP" column="clientip" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="File">
+    <Hierarchy hasAll="true">
+      <Level name="File" column="file" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Item">
+    <Hierarchy hasAll="true">
+      <Level name="Item" column="itemid" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="URI Query">
+    <Hierarchy hasAll="true">
+      <Level name="URI Query" column="uri_query" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="Category">
+    <Hierarchy hasAll="true">
+      <Level name="Category" column="category_id" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+    <Measure name="Hits" column="date_hour" aggregator="count" formatString="#"/>
+    <Measure name="Total Bytes Served" column="bytes" aggregator="sum" formatString="#"/>
+    <Measure name="Average Content Size" column="bytes" aggregator="avg" formatString="#,##0"/>
+  </Cube>
+</Schema>
